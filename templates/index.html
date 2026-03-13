@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Bone Fracture Detection</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    text-align:center;
+    background:#f4f6f8;
+    margin-top:100px;
+}
+
+.box{
+    background:white;
+    padding:40px;
+    width:420px;
+    margin:auto;
+    border-radius:10px;
+    box-shadow:0px 0px 10px rgba(0,0,0,0.2);
+}
+
+button{
+    padding:10px 20px;
+    background:#007BFF;
+    border:none;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0056b3;
+}
+
+.spinner{
+    display:none;
+    margin-top:20px;
+}
+
+.loader{
+    border:6px solid #f3f3f3;
+    border-top:6px solid #007BFF;
+    border-radius:50%;
+    width:40px;
+    height:40px;
+    animation: spin 1s linear infinite;
+    margin:auto;
+}
+
+@keyframes spin{
+    0%{ transform:rotate(0deg); }
+    100%{ transform:rotate(360deg); }
+}
+
+.preview{
+    text-align:center;
+    margin-top:20px;
+}
+
+.preview img{
+    width:200px;
+    border-radius:8px;
+    display:none;
+    margin:auto;
+}
+
+</style>
+
+<script>
+
+function showLoader(){
+    document.getElementById("spinner").style.display="block";
+}
+
+function previewImage(event){
+
+    const reader = new FileReader();
+
+    reader.onload = function(){
+        const output = document.getElementById("preview-img");
+        output.src = reader.result;
+        output.style.display = "block";
+    }
+
+    reader.readAsDataURL(event.target.files[0]);
+}
+
+</script>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Bone Fracture Detection</h2>
+
+<form action="/predict" method="POST" enctype="multipart/form-data" onsubmit="showLoader()">
+
+<input type="file" name="image" accept="image/*" required onchange="previewImage(event)">
+
+<div class="preview">
+<img id="preview-img">
+</div>
+
+<br>
+
+<button type="submit">Analyze</button>
+
+</form>
+
+{% if error %}
+
+<p style="color:red;font-weight:bold;margin-top:15px;">
+⚠ {{ error }}
+</p>
+{% endif %}
+
+<div id="spinner" class="spinner">
+
+<div class="loader"></div>
+
+<p>Analyzing X-ray...</p>
+
+</div>
+
+</div>
+
+</body>
+</html>

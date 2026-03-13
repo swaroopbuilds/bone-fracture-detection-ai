@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>AI Doctor Assistant</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#eef2f7;
+margin:0;
+padding:40px;
+display:flex;
+justify-content:center;
+}
+
+/* Chat Container */
+
+.chat-container{
+width:800px;
+background:white;
+border-radius:12px;
+box-shadow:0 8px 20px rgba(0,0,0,0.15);
+overflow:hidden;
+}
+
+/* Header */
+
+.chat-header{
+background:#007BFF;
+color:white;
+padding:18px;
+font-size:20px;
+font-weight:bold;
+text-align:center;
+}
+
+/* Chat Area */
+
+.chat-body{
+padding:25px;
+background:#f9fafc;
+}
+
+/* AI message */
+
+.ai-message{
+background:#e9f2ff;
+padding:20px;
+border-radius:10px;
+line-height:1.6;
+font-size:15px;
+box-shadow:0 2px 5px rgba(0,0,0,0.08);
+}
+
+/* Response title */
+
+.response-title{
+font-weight:bold;
+margin-bottom:10px;
+}
+
+/* Button section */
+
+.chat-footer{
+text-align:center;
+padding:20px;
+border-top:1px solid #eee;
+}
+
+/* Buttons */
+
+button{
+padding:10px 22px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-size:15px;
+margin:5px;
+}
+
+.back-btn{
+background:#007BFF;
+color:white;
+}
+
+.analyze-btn{
+background:#28a745;
+color:white;
+}
+
+button:hover{
+opacity:0.9;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="chat-container">
+
+<div class="chat-header">
+AI Doctor Assistant
+</div>
+
+<div class="chat-body">
+
+<div class="ai-message">
+
+<div class="response-title">AI Doctor Response:</div>
+
+{{ response | safe }}
+
+</div>
+
+</div>
+
+<div class="chat-footer">
+
+<a href="/">
+<button class="analyze-btn">Analyze Another X-ray</button>
+</a>
+
+<button class="back-btn" onclick="history.back()">
+Ask Another Question
+</button>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
