@@ -121,6 +121,6 @@ python app.py
 
 ---
 
-# 👨‍💻 Author
+# Author
 
 Swaroop Malava
