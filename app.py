@@ -151,16 +151,25 @@ def predict():
 
 @app.route("/ask_ai", methods=["POST"])
 def ask_ai():
+    try:
+        data = request.get_json()
+        question = data.get("question", "").strip()
 
-    data = request.get_json()
-    question = data["question"]
+        if not question:
+            return jsonify({"response": "Please enter a question."})
 
-    if latest_diagnosis is None:
-        response = "Please analyze an X-ray first."
-    else:
-        response = doctor_ai_response(question, latest_diagnosis)
+        if latest_diagnosis is None:
+            response = "Please analyze an X-ray first."
+        else:
+            response = doctor_ai_response(question, latest_diagnosis)
 
-    return jsonify({"response": response})
+        return jsonify({"response": response})
+
+    except Exception as e:
+        print("Ask AI Route Error:", e)
+        return jsonify({
+            "response": "AI service temporarily unavailable."
+        }), 500
 
 
 if __name__ == "__main__":
